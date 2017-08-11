@@ -9,7 +9,7 @@ import java.util.TreeSet;
 public class TreeSetTransformer implements SetTransformer {
 
     @Override
-    public <O extends Comparable> Set<O> transform(Set<O> set) {
+    public <O extends Comparable<?>> Set<O> transform(Set<O> set) {
         if(set instanceof TreeSet) {
             return (TreeSet<O>) set;
         }

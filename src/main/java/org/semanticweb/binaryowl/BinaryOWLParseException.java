@@ -49,7 +49,9 @@ import org.semanticweb.owlapi.io.OWLParserException;
  */
 public class BinaryOWLParseException extends OWLParserException {
 
-    public BinaryOWLParseException(Throwable cause) {
+	private static final long serialVersionUID = 2241854371976674188L;
+
+	public BinaryOWLParseException(Throwable cause) {
         super(cause);
     }
 

@@ -48,6 +48,7 @@ import org.semanticweb.owlapi.model.OWLDisjointClassesAxiom;
 
 import java.io.IOException;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Author: Matthew Horridge<br>
@@ -59,7 +60,7 @@ public class OWLDisjointClassesAxiomSerializer extends AbstractAxiomSerializer<O
 
     @Override
     protected void writeAxiom(OWLDisjointClassesAxiom axiom, BinaryOWLOutputStream outputStream) throws IOException {
-        outputStream.writeOWLObjects(axiom.getClassExpressions());
+        outputStream.writeOWLObjects(axiom.classExpressions().collect(Collectors.toSet()));
     }
 
     @Override

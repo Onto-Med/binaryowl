@@ -48,6 +48,7 @@ import org.semanticweb.owlapi.model.OWLIndividual;
 
 import java.io.IOException;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Author: Matthew Horridge<br>
@@ -59,7 +60,7 @@ public class OWLDifferentIndividualsAxiomSerializer extends AbstractAxiomSeriali
 
     @Override
     protected void writeAxiom(OWLDifferentIndividualsAxiom axiom, BinaryOWLOutputStream outputStream) throws IOException {
-        outputStream.writeOWLObjects(axiom.getIndividuals());
+        outputStream.writeOWLObjects(axiom.individuals().collect(Collectors.toSet()));
     }
 
     @Override

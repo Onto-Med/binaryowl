@@ -19,7 +19,7 @@ import java.util.Set;
  * Bio-Medical Informatics Research Group<br>
  * Date: 26/04/2013
  */
-public class BinaryOWLOntologyBuildingHandler implements BinaryOWLOntologyDocumentHandler<BinaryOWLParseException>, OWLOntologyChangeDataVisitor<Void, RuntimeException> {
+public class BinaryOWLOntologyBuildingHandler implements BinaryOWLOntologyDocumentHandler<BinaryOWLParseException>, OWLOntologyChangeDataVisitor<Void> {
 
     private OWLOntologyLoaderConfiguration loaderConfiguration;
 
@@ -60,7 +60,7 @@ public class BinaryOWLOntologyBuildingHandler implements BinaryOWLOntologyDocume
         for (OWLAnnotation annotation : annotations) {
             manager.applyChange(new AddOntologyAnnotation(ontology, annotation));
         }
-        manager.addAxioms(ontology, mergedAxioms);
+        manager.addAxioms(ontology, mergedAxioms.stream());
     }
 
     public BinaryOWLOntologyDocumentFormat getFormat() {

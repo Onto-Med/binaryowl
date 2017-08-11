@@ -99,6 +99,8 @@ public class BinaryOWLV1DocumentBodySerializer implements BinaryOWLDocumentBodyS
         readOntologyChanges(changesInputStream, handler);
         handler.handleEndDocumentChangesBlock();
         handler.handleEndDocument();
+        
+        lookupTableStream.close();
     }
 
     private void readOntologyChanges(BinaryOWLInputStream inputStream, BinaryOWLOntologyDocumentAppendedChangeHandler changeHandler) throws IOException, BinaryOWLParseException {
@@ -154,6 +156,7 @@ public class BinaryOWLV1DocumentBodySerializer implements BinaryOWLDocumentBodyS
         }
 
         dos.flush();
+        lookupTableOutputStream.close();
     }
 
 }

@@ -60,7 +60,6 @@ import java.io.IOException;
 public abstract class OWLObjectSerializer<C extends OWLObject> extends SerializerBase {
 
 
-    @SuppressWarnings("unchecked")
     final public void write(C object, BinaryOWLOutputStream outputStream) throws IOException {
         writeObject(object, outputStream);
     }

@@ -14,7 +14,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.fail;
 
 /**
@@ -41,7 +40,7 @@ public class TestUtil {
             ByteArrayOutputStream dataOutput = new ByteArrayOutputStream();
             BinaryOWLOutputStream out = new BinaryOWLOutputStream(dataOutput, VERSION);
             serializer.write(obj, out);
-
+            
             ByteArrayInputStream inputStream = new ByteArrayInputStream(dataOutput.toByteArray());
             OWLObject readObject = serializer.read(new BinaryOWLInputStream(inputStream, OWLManager.getOWLDataFactory(), VERSION));
             assertEquals(obj, readObject);

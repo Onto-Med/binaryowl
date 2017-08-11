@@ -47,6 +47,7 @@ import org.semanticweb.owlapi.model.*;
 import javax.annotation.Nonnull;
 import java.io.*;
 import java.net.URI;
+import java.util.Optional;
 
 /**
  * Author: Matthew Horridge<br>
@@ -56,7 +57,9 @@ import java.net.URI;
  */
 public class BinaryOWLOntologyDocumentStorer implements OWLStorer {
 
-    public boolean canStoreOntology(@Nonnull OWLDocumentFormat ontologyFormat) {
+	private static final long serialVersionUID = 6644223908951348911L;
+
+	public boolean canStoreOntology(@Nonnull OWLDocumentFormat ontologyFormat) {
         return ontologyFormat instanceof BinaryOWLOntologyDocumentFormat;
     }
 
@@ -72,8 +75,10 @@ public class BinaryOWLOntologyDocumentStorer implements OWLStorer {
 
     @Override
     public void storeOntology(@Nonnull OWLOntology ontology, @Nonnull OWLOntologyDocumentTarget target, @Nonnull OWLDocumentFormat format) throws OWLOntologyStorageException, IOException {
-        if(target.isOutputStreamAvailable()) {
-            storeOntology(ontology, new BufferedOutputStream(target.getOutputStream()));
+        Optional<OutputStream> outputStream = target.getOutputStream();
+    	
+    	if (outputStream.isPresent()) {
+            storeOntology(ontology, new BufferedOutputStream(outputStream.get()));
         }
         else {
             throw new OWLOntologyStorageException("Unsupported target type");

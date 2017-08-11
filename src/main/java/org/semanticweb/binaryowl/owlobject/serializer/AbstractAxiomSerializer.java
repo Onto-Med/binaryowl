@@ -47,6 +47,7 @@ import org.semanticweb.owlapi.model.OWLAxiom;
 
 import java.io.IOException;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Author: Matthew Horridge<br>
@@ -58,7 +59,7 @@ public abstract class AbstractAxiomSerializer<O extends OWLAxiom> extends OWLObj
 
     @Override
     final protected void writeObject(O object, BinaryOWLOutputStream outputStream) throws IOException {
-        outputStream.writeOWLObjects(object.getAnnotations());
+        outputStream.writeOWLObjects(object.annotations().collect(Collectors.toSet()));
         writeAxiom(object, outputStream);
     }
     

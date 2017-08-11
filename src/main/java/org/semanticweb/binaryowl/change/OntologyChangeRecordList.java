@@ -58,6 +58,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -202,25 +203,25 @@ public class OntologyChangeRecordList implements TimeStampedMetadataChunk {
      */
     private Set<OWLEntity> getChangeSignature() {
         Set<OWLEntity> result = new HashSet<OWLEntity>();
-        final OWLOntologyChangeDataVisitor<Set<OWLEntity>, RuntimeException> visitor = new OWLOntologyChangeDataVisitor<Set<OWLEntity>, RuntimeException>() {
+        final OWLOntologyChangeDataVisitor<Set<OWLEntity>> visitor = new OWLOntologyChangeDataVisitor<Set<OWLEntity>>() {
             @Override
             public Set<OWLEntity> visit(AddAxiomData data) throws RuntimeException {
-                return data.getAxiom().getSignature();
+                return data.getAxiom().signature().collect(Collectors.toSet());
             }
 
             @Override
             public Set<OWLEntity> visit(RemoveAxiomData data) throws RuntimeException {
-                return data.getAxiom().getSignature();
+                return data.getAxiom().signature().collect(Collectors.toSet());
             }
 
             @Override
             public Set<OWLEntity> visit(AddOntologyAnnotationData data) throws RuntimeException {
-                return data.getAnnotation().getSignature();
+                return data.getAnnotation().signature().collect(Collectors.toSet());
             }
 
             @Override
             public Set<OWLEntity> visit(RemoveOntologyAnnotationData data) throws RuntimeException {
-                return data.getAnnotation().getSignature();
+                return data.getAnnotation().signature().collect(Collectors.toSet());
             }
 
             @Override
@@ -289,7 +290,7 @@ public class OntologyChangeRecordList implements TimeStampedMetadataChunk {
             changeRecords = readRecords(inputStream);
         }
 
-        long nextPos = inputStream.getBytesRead();
+        inputStream.getBytesRead();
         if(versionNumber == VERSION_2) {
             inputStream.popLookupTable();
         }

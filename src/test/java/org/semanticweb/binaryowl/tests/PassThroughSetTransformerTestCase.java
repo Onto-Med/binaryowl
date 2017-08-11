@@ -16,7 +16,7 @@ import static org.hamcrest.Matchers.is;
  * @author Matthew Horridge, Stanford University, Bio-Medical Informatics Research Group, Date: 13/09/2014
  */
 @RunWith(MockitoJUnitRunner.class)
-public class PassThroughSetTransformerTestCase<O extends Comparable> {
+public class PassThroughSetTransformerTestCase<O extends Comparable<?>> {
 
     @Mock
     private Set<O> set;

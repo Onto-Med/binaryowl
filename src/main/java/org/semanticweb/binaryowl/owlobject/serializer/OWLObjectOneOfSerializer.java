@@ -47,6 +47,7 @@ import org.semanticweb.owlapi.model.OWLObjectOneOf;
 
 import java.io.IOException;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Author: Matthew Horridge<br>
@@ -58,7 +59,7 @@ public class OWLObjectOneOfSerializer extends OWLObjectSerializer<OWLObjectOneOf
 
     @Override
     protected void writeObject(OWLObjectOneOf object, BinaryOWLOutputStream outputStream) throws IOException {
-        outputStream.writeOWLObjects(object.getIndividuals());
+        outputStream.writeOWLObjects(object.individuals().collect(Collectors.toSet()));
     }
 
     @Override

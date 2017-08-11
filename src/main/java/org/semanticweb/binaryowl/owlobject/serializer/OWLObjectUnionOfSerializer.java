@@ -47,6 +47,7 @@ import org.semanticweb.owlapi.model.OWLObjectUnionOf;
 
 import java.io.IOException;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Author: Matthew Horridge<br>
@@ -58,7 +59,7 @@ public class OWLObjectUnionOfSerializer extends OWLObjectSerializer<OWLObjectUni
 
     @Override
     protected void writeObject(OWLObjectUnionOf object, BinaryOWLOutputStream outputStream) throws IOException {
-        outputStream.writeOWLObjects(object.getOperands());
+        outputStream.writeOWLObjects(object.operands().collect(Collectors.toSet()));
     }
 
     @Override

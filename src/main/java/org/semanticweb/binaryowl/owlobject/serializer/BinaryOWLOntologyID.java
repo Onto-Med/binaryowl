@@ -39,7 +39,6 @@
 
 package org.semanticweb.binaryowl.owlobject.serializer;
 
-import com.google.common.base.Optional;
 import org.semanticweb.binaryowl.BinaryOWLParseException;
 import org.semanticweb.binaryowl.stream.BinaryOWLInputStream;
 import org.semanticweb.binaryowl.stream.BinaryOWLOutputStream;
@@ -47,6 +46,7 @@ import org.semanticweb.owlapi.model.IRI;
 import org.semanticweb.owlapi.model.OWLOntologyID;
 
 import java.io.IOException;
+import java.util.Optional;
 
 /**
  * Author: Matthew Horridge<br>
@@ -104,7 +104,7 @@ public class BinaryOWLOntologyID {
             if(marker == 1) {
                 IRISerializer serializer = new IRISerializer();
                 IRI ontologyIRI = serializer.readObject(inputStream);
-                ontologyID = new OWLOntologyID(Optional.of(ontologyIRI), Optional.<IRI>absent());
+                ontologyID = new OWLOntologyID(Optional.of(ontologyIRI), Optional.<IRI>empty());
             }
             else if(marker == 2) {
                 IRISerializer serializer = new IRISerializer();

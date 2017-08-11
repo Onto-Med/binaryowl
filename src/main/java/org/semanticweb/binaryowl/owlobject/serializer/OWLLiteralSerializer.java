@@ -82,7 +82,7 @@ public class OWLLiteralSerializer extends OWLObjectSerializer<OWLLiteral> {
 
     private static final OWLDatatype XSD_BOOLEAN_DATATYPE = new OWLDatatypeImpl(OWL2Datatype.XSD_BOOLEAN.getIRI());
 
-
+    private static final OWLDatatype RDF_LANG_STRING_DATATYPE = new OWLDatatypeImpl(OWL2Datatype.RDF_LANG_STRING.getIRI());
 
     private static final OWLLiteral BOOLEAN_TRUE = new OWLLiteralImplNoCompression("true", null, XSD_BOOLEAN_DATATYPE);
 
@@ -158,6 +158,16 @@ public class OWLLiteralSerializer extends OWLObjectSerializer<OWLLiteral> {
             outputStream.writeByte(XSD_BOOLEAN_MARKER);
             outputStream.writeBoolean(literal.parseBoolean());
             return;
+        }
+        else if (literal.getDatatype().equals(RDF_LANG_STRING_DATATYPE)) {
+        	outputStream.writeByte(RDF_PLAIN_LITERAL_MARKER);
+        	if (literal.hasLang()) {
+                outputStream.write(LANG_MARKER);
+                writeString(literal.getLang(), outputStream);
+            }
+            else {
+                outputStream.writeByte(NO_LANG_MARKER);
+            }
         }
         else if (literal.isRDFPlainLiteral()) {
             outputStream.writeByte(RDF_PLAIN_LITERAL_MARKER);

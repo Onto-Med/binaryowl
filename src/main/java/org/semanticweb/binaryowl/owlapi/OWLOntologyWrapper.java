@@ -4,6 +4,7 @@ import org.semanticweb.binaryowl.doc.OWLOntologyDocument;
 import org.semanticweb.owlapi.model.*;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Author: Matthew Horridge<br>
@@ -26,46 +27,46 @@ public class OWLOntologyWrapper implements OWLOntologyDocument {
 
     @Override
     public Set<OWLAnnotation> getAnnotations() {
-        return delegate.getAnnotations();
+        return delegate.annotations().collect(Collectors.toSet());
     }
 
     @Override
     public Set<OWLImportsDeclaration> getImportsDeclarations() {
-        return delegate.getImportsDeclarations();
+        return delegate.importsDeclarations().collect(Collectors.toSet());
     }
 
     @Override
     public <T extends OWLAxiom> Set<T> getAxioms(AxiomType<T> axiomType) {
-        return delegate.getAxioms(axiomType);
+        return delegate.axioms(axiomType).collect(Collectors.toSet());
     }
 
     @Override
     public Set<OWLClass> getClassesInSignature() {
-        return delegate.getClassesInSignature();
+        return delegate.classesInSignature().collect(Collectors.toSet());
     }
 
     @Override
     public Set<OWLObjectProperty> getObjectPropertiesInSignature() {
-        return delegate.getObjectPropertiesInSignature();
+        return delegate.objectPropertiesInSignature().collect(Collectors.toSet());
     }
 
     @Override
     public Set<OWLDataProperty> getDataPropertiesInSignature() {
-        return delegate.getDataPropertiesInSignature();
+        return delegate.dataPropertiesInSignature().collect(Collectors.toSet());
     }
 
     @Override
     public Set<OWLAnnotationProperty> getAnnotationPropertiesInSignature() {
-        return delegate.getAnnotationPropertiesInSignature();
+        return delegate.annotationPropertiesInSignature().collect(Collectors.toSet());
     }
 
     @Override
     public Set<OWLNamedIndividual> getIndividualsInSignature() {
-        return delegate.getIndividualsInSignature();
+        return delegate.individualsInSignature().collect(Collectors.toSet());
     }
 
     @Override
     public Set<OWLDatatype> getDatatypesInSignature() {
-        return delegate.getDatatypesInSignature();
+        return delegate.datatypesInSignature().collect(Collectors.toSet());
     }
 }

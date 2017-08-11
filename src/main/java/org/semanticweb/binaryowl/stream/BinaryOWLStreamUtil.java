@@ -21,7 +21,9 @@ public final class BinaryOWLStreamUtil {
      */
     protected static class ListBackedSet<O> extends ArrayList<O> implements Set<O> {
 
-        protected ListBackedSet(int initialCapacity) {
+		private static final long serialVersionUID = 752676184776515506L;
+
+		protected ListBackedSet(int initialCapacity) {
             super(initialCapacity);
         }
     }

@@ -63,6 +63,6 @@ public class OWLObjectInverseOfSerializer extends OWLObjectSerializer<OWLObjectI
     @Override
     protected OWLObjectInverseOf readObject(BinaryOWLInputStream inputStream) throws IOException, BinaryOWLParseException {
         OWLObjectPropertyExpression inverse = inputStream.readOWLObject();
-        return inputStream.getDataFactory().getOWLObjectInverseOf(inverse);
+        return inputStream.getDataFactory().getOWLObjectInverseOf(inverse.getNamedProperty());
     }
 }

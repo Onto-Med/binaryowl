@@ -47,6 +47,7 @@ import org.semanticweb.owlapi.model.*;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Author: Matthew Horridge<br>
@@ -59,8 +60,8 @@ public class OWLHasKeyAxiomSerializer extends AbstractAxiomSerializer<OWLHasKeyA
     @Override
     protected void writeAxiom(OWLHasKeyAxiom axiom, BinaryOWLOutputStream outputStream) throws IOException {
         outputStream.writeOWLObject(axiom.getClassExpression());
-        outputStream.writeOWLObjects(axiom.getObjectPropertyExpressions());
-        outputStream.writeOWLObjects(axiom.getDataPropertyExpressions());
+        outputStream.writeOWLObjects(axiom.objectPropertyExpressions().collect(Collectors.toSet()));
+        outputStream.writeOWLObjects(axiom.dataPropertyExpressions().collect(Collectors.toSet()));
     }
 
     @Override

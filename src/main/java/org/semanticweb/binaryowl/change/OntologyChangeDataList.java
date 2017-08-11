@@ -156,7 +156,7 @@ public class OntologyChangeDataList implements TimeStampedMetadataChunk, Iterabl
 
 
     private void read(BinaryOWLInputStream inputStream) throws IOException, BinaryOWLParseException {
-        int dataSize = inputStream.readInt();
+    	inputStream.readInt();
         int chunkType = inputStream.readInt();
         if(chunkType != CHUNK_TYPE) {
             throw new BinaryOWLParseException("Expected change record chunk marker (0x" + Integer.toHexString(CHUNK_TYPE) + ") but found 0x" + Integer.toHexString(chunkType));
@@ -170,7 +170,7 @@ public class OntologyChangeDataList implements TimeStampedMetadataChunk, Iterabl
     }
 
     private List<OWLOntologyChangeData> readChangeRecordData(BinaryOWLInputStream inputStream) throws IOException, BinaryOWLParseException {
-        int recordSizeInBytes = inputStream.readInt();
+    	inputStream.readInt();
         int listSize = inputStream.readInt();
         List<OWLOntologyChangeData> list = new ArrayList<OWLOntologyChangeData>(listSize + 2);
         for(int i = 0; i < listSize; i++) {
@@ -182,7 +182,7 @@ public class OntologyChangeDataList implements TimeStampedMetadataChunk, Iterabl
 
 
     private BinaryOWLMetadata readMetadata(BinaryOWLInputStream inputStream) throws IOException, BinaryOWLParseException {
-        int recordSize = inputStream.readInt();
+    	inputStream.readInt();
         return new BinaryOWLMetadata(inputStream);
 
     }
@@ -202,7 +202,6 @@ public class OntologyChangeDataList implements TimeStampedMetadataChunk, Iterabl
 
 
 
-    @SuppressWarnings("unchecked")
     private void writeChangeRecordData(BinaryOWLOutputStream mainOutputStream) throws IOException {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         DataOutputStream changeRecordDataOutputStream = new DataOutputStream(byteArrayOutputStream);

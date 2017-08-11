@@ -9,6 +9,7 @@ import org.semanticweb.owlapi.model.SWRLRule;
 
 import java.io.IOException;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Author: Matthew Horridge<br>
@@ -20,8 +21,8 @@ public class SWRLRuleSerializer extends AbstractAxiomSerializer<SWRLRule> {
 
     @Override
     protected void writeAxiom(SWRLRule axiom, BinaryOWLOutputStream outputStream) throws IOException {
-        outputStream.writeOWLObjects(axiom.getBody());
-        outputStream.writeOWLObjects(axiom.getHead());
+        outputStream.writeOWLObjects(axiom.body().collect(Collectors.toSet()));
+        outputStream.writeOWLObjects(axiom.head().collect(Collectors.toSet()));
     }
 
     @Override

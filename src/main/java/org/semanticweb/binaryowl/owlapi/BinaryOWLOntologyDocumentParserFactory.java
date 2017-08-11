@@ -43,8 +43,6 @@ import org.semanticweb.owlapi.formats.BinaryRDFDocumentFormatFactory;
 import org.semanticweb.owlapi.io.OWLParser;
 import org.semanticweb.owlapi.io.OWLParserFactory;
 import org.semanticweb.owlapi.model.OWLDocumentFormatFactory;
-import org.semanticweb.owlapi.model.OWLOntologyManager;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Collections;
@@ -58,7 +56,9 @@ import java.util.List;
  */
 public class BinaryOWLOntologyDocumentParserFactory implements OWLParserFactory {
 
-    @Nonnull
+	private static final long serialVersionUID = 1865306544858189400L;
+
+	@Nonnull
     @Override
     public OWLParser createParser() {
         return new BinaryOWLOntologyDocumentParser();

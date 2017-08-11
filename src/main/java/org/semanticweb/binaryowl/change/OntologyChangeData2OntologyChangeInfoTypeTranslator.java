@@ -47,7 +47,7 @@ import org.semanticweb.owlapi.change.*;
  * Bio-Medical Informatics Research Group<br>
  * Date: 09/05/2012
  */
-public class OntologyChangeData2OntologyChangeInfoTypeTranslator implements OWLOntologyChangeDataVisitor<OntologyChangeDataType, RuntimeException> {
+public class OntologyChangeData2OntologyChangeInfoTypeTranslator implements OWLOntologyChangeDataVisitor<OntologyChangeDataType> {
 
     public OntologyChangeDataType visit(AddAxiomData data) throws RuntimeException {
         return OntologyChangeDataType.ADD_AXIOM;

@@ -53,7 +53,8 @@ import javax.annotation.Nonnull;
  */
 public class BinaryOWLOntologyDocumentFormat extends OWLDocumentFormatImpl {
 
-    private BinaryOWLMetadata documentMetadata;
+	private static final long serialVersionUID = 7425515876772788157L;
+	private BinaryOWLMetadata documentMetadata;
 
     public BinaryOWLOntologyDocumentFormat() {
         documentMetadata = new BinaryOWLMetadata();
@@ -72,7 +73,6 @@ public class BinaryOWLOntologyDocumentFormat extends OWLDocumentFormatImpl {
         return "Binary OWL Ontology Document";
     }
 
-    @Override
     public boolean isPrefixOWLOntologyFormat() {
         return false;
     }
@@ -83,7 +83,6 @@ public class BinaryOWLOntologyDocumentFormat extends OWLDocumentFormatImpl {
     }
 
     @Nonnull
-    @Override
     public PrefixDocumentFormat asPrefixOWLOntologyFormat() {
         throw new ClassCastException("BinaryOWLOntologyDocumentFormat is not a prefix format");
     }

@@ -83,7 +83,6 @@ public class BinaryOWLInputStream extends InputStream {
         return dataFactory;
     }
 
-    @SuppressWarnings("unchecked")
     public <O extends OWLObject> O readOWLObject() throws IOException, BinaryOWLParseException  {
         return OWLObjectBinaryType.read(this);
     }
@@ -162,8 +161,6 @@ public class BinaryOWLInputStream extends InputStream {
     }
 
     
-    private Map<Integer, OWLAnonymousIndividual> map = new HashMap<Integer, OWLAnonymousIndividual>();
-
     public OWLAnonymousIndividual readAnonymousIndividual() throws IOException {
         int id = readInt();
 //        OWLAnonymousIndividual ind = map.get(id);
@@ -451,7 +448,6 @@ public class BinaryOWLInputStream extends InputStream {
      *         encountered before a byte can be read.
      * @throws java.io.IOException if an I/O error occurs.
      */
-    @SuppressWarnings("deprecation")
     @Deprecated
     public String readLine() throws IOException {
         return dataInput.readLine();

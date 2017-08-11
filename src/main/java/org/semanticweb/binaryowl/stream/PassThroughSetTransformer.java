@@ -15,8 +15,8 @@ public class PassThroughSetTransformer implements SetTransformer {
      * @param <O> The type of elements contained within the set.
      * @return The same set that was supplied.
      */
-    @Override
-    public <O extends Comparable> Set<O> transform(Set<O> set) {
+	@Override
+    public <O extends Comparable<?>> Set<O> transform(Set<O> set) {
         return checkNotNull(set);
     }
 }

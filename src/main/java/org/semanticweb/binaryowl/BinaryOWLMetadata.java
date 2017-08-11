@@ -128,8 +128,8 @@ public class BinaryOWLMetadata {
         read(inputStream);
     }
 
-    public boolean isEmpty() {
-        for(AttributeMap attributeValueMap : attributeMaps.values()) {
+	public boolean isEmpty() {
+        for(AttributeMap<?> attributeValueMap : attributeMaps.values()) {
             if(!attributeValueMap.isEmpty()) {
                 return false;
             }
@@ -553,7 +553,8 @@ public class BinaryOWLMetadata {
 
     private abstract class AttributeMap<O> implements Map<String, O>{
 
-        public static final int DEFAULT_INITIAL_SIZE = 2;
+        @SuppressWarnings("unused")
+		public static final int DEFAULT_INITIAL_SIZE = 2;
         
         private Map<String, O> delegate = null;
 

@@ -15,5 +15,5 @@ public interface SetTransformer {
      * @param <O> The type of elements contained in the set.
      * @return The transformed set.  Not {@code null}.
      */
-    <O extends Comparable> Set<O> transform(Set<O> set);
+    <O extends Comparable<?>> Set<O> transform(Set<O> set);
 }

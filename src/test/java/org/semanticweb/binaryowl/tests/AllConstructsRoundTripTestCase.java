@@ -13,6 +13,7 @@ import java.io.*;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
@@ -42,10 +43,10 @@ public class AllConstructsRoundTripTestCase {
         serializer.read(inputStream, new BinaryOWLOntologyBuildingHandler(ontIn), manager.getOWLDataFactory());
 
         assertThat(ont, is(ontIn));
-        assertThat(ont.getAnnotations(), is(ontIn.getAnnotations()));
+        assertThat(ont.annotations().collect(Collectors.toSet()), is(ontIn.annotations().collect(Collectors.toSet())));
         for(AxiomType<?> type : AxiomType.AXIOM_TYPES) {
-            Set<? extends OWLAxiom> ontAxioms = ont.getAxioms(type);
-            Set<? extends OWLAxiom> inAxioms = ontIn.getAxioms(type);
+            Set<? extends OWLAxiom> ontAxioms = ont.axioms(type).collect(Collectors.toSet());
+            Set<? extends OWLAxiom> inAxioms = ontIn.axioms(type).collect(Collectors.toSet());
             assertThat(ontAxioms, Matchers.<Set<? extends OWLAxiom>>is(inAxioms));
         }
     }

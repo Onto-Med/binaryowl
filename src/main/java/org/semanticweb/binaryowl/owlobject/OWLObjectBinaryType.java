@@ -292,7 +292,7 @@ public class OWLObjectBinaryType<C extends OWLObject> {
     
 
     static  {
-        doIntegrityCheck();
+		doIntegrityCheck();
 
     }
 
@@ -353,7 +353,7 @@ public class OWLObjectBinaryType<C extends OWLObject> {
         Method[] methods = OWLObjectVisitor.class.getMethods();
         Set<String> typeValues = new HashSet<String>();
         Set<Byte> markers = new HashSet<Byte>();
-        for(OWLObjectBinaryType binaryType : values()) {
+        for(OWLObjectBinaryType<?> binaryType : values()) {
             String typeClassName = binaryType.getOWLObjectClass().getSimpleName();
             typeValues.add(typeClassName);
             if(!markers.add(binaryType.getMarker())) {
@@ -361,9 +361,10 @@ public class OWLObjectBinaryType<C extends OWLObject> {
             }
         }
         for(Method method : methods) {
-            Class [] parameters = method.getParameterTypes();
+            Class<?> [] parameters = method.getParameterTypes();
             String simpleName = parameters[0].getSimpleName();
-            if(!typeValues.contains(simpleName)) {
+            
+            if (!"Object".equals(simpleName) && !typeValues.contains(simpleName)) {
                 throw new RuntimeException("BinaryOWLObjectType not defined for " + simpleName);
             }
         }

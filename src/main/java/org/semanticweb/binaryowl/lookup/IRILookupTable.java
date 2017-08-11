@@ -39,8 +39,6 @@
 
 package org.semanticweb.binaryowl.lookup;
 
-import com.google.common.base.*;
-import com.google.common.base.Optional;
 import org.semanticweb.binaryowl.doc.OWLOntologyDocument;
 import org.semanticweb.owlapi.model.*;
 import uk.ac.manchester.cs.owl.owlapi.*;
@@ -121,16 +119,16 @@ public class IRILookupTable {
         }
     }
 
-    private int get(OWLEntity e) {
+    public int get(OWLEntity e) {
         return iri2IndexMap.get(e.getIRI());
     }
 
-    private int get(IRI iri) {
+    public int get(IRI iri) {
         return getIndex(iri);
     }
 
-    private IRI get(int index) {
-        return iriTable [index];
+    public IRI get(int index) {
+        return iriTable[index];
     }
 
     private int getIndex(IRI iri) {
@@ -152,7 +150,7 @@ public class IRILookupTable {
         for (IRI iri : iri2IndexMap.keySet()) {
             int si = startIndex.get(iri.getNamespace());
             os.writeInt(si);
-            com.google.common.base.Optional<String> remainder = iri.getRemainder();
+            Optional<String> remainder = iri.getRemainder();
             if (!remainder.isPresent()) {
                 os.writeUTF("");
             }

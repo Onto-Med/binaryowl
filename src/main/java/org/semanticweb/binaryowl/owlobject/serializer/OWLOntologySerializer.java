@@ -39,7 +39,6 @@
 
 package org.semanticweb.binaryowl.owlobject.serializer;
 
-import com.google.common.base.Optional;
 import org.semanticweb.binaryowl.BinaryOWLParseException;
 import org.semanticweb.binaryowl.stream.BinaryOWLInputStream;
 import org.semanticweb.binaryowl.stream.BinaryOWLOutputStream;
@@ -48,7 +47,9 @@ import org.semanticweb.owlapi.model.*;
 
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Author: Matthew Horridge<br>
@@ -75,12 +76,12 @@ public class OWLOntologySerializer extends OWLObjectSerializer<OWLOntology> {
         }
 
         Set<IRI> importDecls = new HashSet<>();
-        for(OWLImportsDeclaration decl : object.getImportsDeclarations()) {
+        object.importsDeclarations().forEach(decl -> {
             importDecls.add(decl.getIRI());
-        }
+        });
         outputStream.writeOWLObjects(importDecls);
-        outputStream.writeOWLObjects(object.getAnnotations());
-        outputStream.writeOWLObjects(object.getAxioms());
+        outputStream.writeOWLObjects(object.annotations().collect(Collectors.toSet()));
+        outputStream.writeOWLObjects(object.axioms().collect(Collectors.toSet()));
     }
 
     @Override
@@ -95,7 +96,7 @@ public class OWLOntologySerializer extends OWLObjectSerializer<OWLOntology> {
             }
             else {
                 if(versionIRI.isEmpty()) {
-                    id = new OWLOntologyID(Optional.of(IRI.create(ontologyIRI)), Optional.<IRI>absent());
+                    id = new OWLOntologyID(Optional.of(IRI.create(ontologyIRI)), Optional.<IRI>empty());
                 }
                 else {
                     id = new OWLOntologyID(Optional.of(IRI.create(ontologyIRI)), Optional.of(IRI.create(versionIRI)));
@@ -115,7 +116,7 @@ public class OWLOntologySerializer extends OWLObjectSerializer<OWLOntology> {
             for (OWLAnnotation annotation : annotations) {
                 manager.applyChange(new AddOntologyAnnotation(ontology, annotation));
             }
-            manager.addAxioms(ontology,  axioms);
+            manager.addAxioms(ontology, axioms.stream());
             return ontology;
         }
         catch (OWLOntologyCreationException e) {

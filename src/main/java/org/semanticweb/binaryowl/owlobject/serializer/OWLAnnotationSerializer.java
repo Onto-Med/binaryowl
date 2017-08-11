@@ -48,6 +48,7 @@ import org.semanticweb.owlapi.model.OWLAnnotationValue;
 
 import java.io.IOException;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Author: Matthew Horridge<br>
@@ -59,7 +60,7 @@ public class OWLAnnotationSerializer extends OWLObjectSerializer<OWLAnnotation> 
 
     @Override
     protected void writeObject(OWLAnnotation object, BinaryOWLOutputStream outputStream) throws IOException {
-        outputStream.writeOWLObjects(object.getAnnotations());
+        outputStream.writeOWLObjects(object.annotations().collect(Collectors.toSet()));
         outputStream.writeOWLObject(object.getProperty());
         outputStream.writeOWLObject(object.getValue());
     }

@@ -56,7 +56,6 @@ import java.io.IOException;
 public class AddAxiomDataSerializer extends OntologyChangeDataSerializer<AddAxiomData> {
 
     @Override
-    @SuppressWarnings("unchecked")
     public void write(AddAxiomData changeData, BinaryOWLOutputStream outputStream) throws IOException {
         outputStream.writeOWLObject(changeData.getAxiom());
     }

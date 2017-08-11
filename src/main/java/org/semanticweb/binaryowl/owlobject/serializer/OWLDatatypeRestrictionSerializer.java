@@ -48,6 +48,7 @@ import org.semanticweb.owlapi.model.OWLFacetRestriction;
 
 import java.io.IOException;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Author: Matthew Horridge<br>
@@ -60,7 +61,7 @@ public class OWLDatatypeRestrictionSerializer extends OWLObjectSerializer<OWLDat
     @Override
     protected void writeObject(OWLDatatypeRestriction object, BinaryOWLOutputStream outputStream) throws IOException {
         outputStream.writeOWLObject(object.getDatatype());
-        outputStream.writeOWLObjects(object.getFacetRestrictions());
+        outputStream.writeOWLObjects(object.facetRestrictions().collect(Collectors.toSet()));
     }
 
     @Override

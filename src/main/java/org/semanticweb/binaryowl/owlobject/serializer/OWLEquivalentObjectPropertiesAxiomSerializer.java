@@ -48,6 +48,7 @@ import org.semanticweb.owlapi.model.OWLObjectPropertyExpression;
 
 import java.io.IOException;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Author: Matthew Horridge<br>
@@ -59,7 +60,7 @@ public class OWLEquivalentObjectPropertiesAxiomSerializer extends AbstractAxiomS
 
     @Override
     protected void writeAxiom(OWLEquivalentObjectPropertiesAxiom axiom, BinaryOWLOutputStream outputStream) throws IOException {
-        outputStream.writeOWLObjects(axiom.getProperties());
+        outputStream.writeOWLObjects(axiom.properties().collect(Collectors.toSet()));
     }
 
     @Override

@@ -1,7 +1,6 @@
 package org.semanticweb.binaryowl.tests;
 
 import org.junit.Test;
-import org.semanticweb.binaryowl.owlobject.OWLObjectBinaryType;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;

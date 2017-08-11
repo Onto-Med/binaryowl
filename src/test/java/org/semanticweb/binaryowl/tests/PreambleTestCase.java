@@ -37,6 +37,6 @@ public class PreambleTestCase {
     public void testMagicNumberNotPresent() throws IOException, BinaryOWLParseException {
         byte [] preambleBytes = new byte[] {0, 0, 0, 0};
         BinaryOWLOntologyDocumentPreamble preamble = new BinaryOWLOntologyDocumentPreamble(new DataInputStream(new ByteArrayInputStream(preambleBytes)));
-        BinaryOWLVersion version = preamble.getFileFormatVersion();
+        preamble.getFileFormatVersion();
     }
 }
