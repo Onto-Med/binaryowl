@@ -3,3 +3,6 @@ Project_Default.xml
 *.iml
 .idea
 target
+.settings
+.project
+.classpath
